@@ -1,0 +1,10 @@
+server:
+  port: 8092
+spring:
+  data:
+    elasticsearch:
+      cluster-nodes: localhost:9300
+contact-ms:
+  base-url: http://localhost:8090
+billing-ms:
+  base-url: http://localhost:8091
