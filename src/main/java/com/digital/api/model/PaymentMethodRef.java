@@ -1,11 +1,10 @@
 package com.digital.api.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 
 /**
@@ -17,12 +16,13 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @ApiModel(description = "PaymentMethod reference. A payment method defines a specific mean of payment (e.g direct debit).")
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2018-09-17T08:21:26.946+05:30")
-
+@Document(indexName = "paymentmethodref", type = "account")
 public class PaymentMethodRef   {
   private String referredType = null;
 
   private String href = null;
 
+  @Id
   private String id = null;
 
   private String name = null;

@@ -5,7 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 
 /**
@@ -17,8 +18,12 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @ApiModel(description = "Defines a plan for payment (when a party wants to spread his payments)")
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2018-09-17T08:21:26.946+05:30")
-
+@Document(indexName = "paymentplan", type = "account")
 public class PaymentPlan   {
+
+  @Id
+  private String id;
+
   private String baseType = null;
 
   private String schemaLocation = null;
@@ -290,6 +295,14 @@ public class PaymentPlan   {
       return "null";
     }
     return o.toString().replace("\n", "\n    ");
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
   }
 }
 

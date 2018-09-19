@@ -5,7 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 
 /**
@@ -17,12 +18,13 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @ApiModel(description = "AccountReceivable reference. An account of money owed by a party to another entity in exchange for goods or services that have been delivered or used. An account receivable aggregates the amounts of one or more party accounts (billing or settlement) owned by a given party.")
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2018-09-17T08:21:26.946+05:30")
-
+@Document(indexName = "financialaccountref", type = "account")
 public class FinancialAccountRef   {
   private String referredType = null;
 
   private String href = null;
 
+  @Id
   private String id = null;
 
   private String name = null;

@@ -43,13 +43,25 @@ public class FinancialAccountApiController {
             @ApiResponse(code = 409, message = "Conflict", response = FinancialAccount.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = FinancialAccount.class) })
     @GetMapping(value = "/financialAccount", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-    public ResponseEntity<List<FinancialAccount>> listFinancialAccount(@ApiParam(value = "Comma separated properties to display in response") @RequestParam(value = "fields", required = false) String fields
+    public Flux<FinancialAccount> listFinancialAccount(@ApiParam(value = "Comma separated properties to display in response") @RequestParam(value = "fields", required = false) String fields
         ,@ApiParam(value = "Requested index for start of resources to be provided in response") @RequestParam(value = "offset", required = false) Integer offset
         ,@ApiParam(value = "Requested number of resources to be provided in response") @RequestParam(value = "limit", required = false) Integer limit
     ) {
 
-        financialAccountService.getAllFinancialAccount();
-        return new ResponseEntity<List<FinancialAccount>>(HttpStatus.OK);
+        List<FinancialAccount> financialAccountList = new ArrayList<>();
+        financialAccountService.getAllFinancialAccount().stream()
+            .forEach(
+                    financialAccount -> {
+                        try {
+                            financialAccountList.add(financialAccountUtil.populateFinancialAccount(financialAccount));
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+            );
+        return Flux.fromIterable(financialAccountList);
     }
 
     @ApiResponses(value = {

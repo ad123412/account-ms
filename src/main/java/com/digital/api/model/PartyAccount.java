@@ -8,7 +8,8 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
 import org.joda.time.DateTime;
-
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 
 /**
@@ -20,7 +21,7 @@ import org.joda.time.DateTime;
  */
 @ApiModel(description = "Account used for billing or for settlement purposes concerning a given party (an organization or an individual).")
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2018-09-17T08:21:26.946+05:30")
-
+@Document(indexName = "partyaccount", type = "account")
 public class PartyAccount   {
   private String baseType = null;
 
@@ -34,9 +35,10 @@ public class PartyAccount   {
 
   private String href = null;
 
+  @Id
   private String id = null;
 
-  private DateTime lastModified = null;
+  private String lastModified = null;
 
   private String name = null;
 
@@ -184,7 +186,7 @@ public class PartyAccount   {
     this.id = id;
   }
 
-  public PartyAccount lastModified(DateTime lastModified) {
+  public PartyAccount lastModified(String lastModified) {
     this.lastModified = lastModified;
     return this;
   }
@@ -194,11 +196,11 @@ public class PartyAccount   {
    * @return lastModified
   **/
   @ApiModelProperty(value = "Date of last modification of the account")
-  public DateTime getLastModified() {
+  public String getLastModified() {
     return lastModified;
   }
 
-  public void setLastModified(DateTime lastModified) {
+  public void setLastModified(String lastModified) {
     this.lastModified = lastModified;
   }
 
